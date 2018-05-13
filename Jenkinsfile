@@ -17,8 +17,10 @@ pipeline {
             }
         }
         stage ('Publish Code') {
-            sshagent (credentials: ['react-server']) {
-                sh 'rsync -azv dist 67.99.101.105:/srv/react-full-env/dist'
+            steps {
+                sshagent (credentials: ['react-server']) {
+                    sh 'rsync -azv dist 67.99.101.105:/srv/react-full-env/dist'
+                }
             }
         }
     }
