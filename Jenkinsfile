@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir 'docker/ci'
-        }
-    }
+    agent any
     stages {
         stage ('Install Dependencies') {
             steps {
@@ -13,14 +8,12 @@ pipeline {
         }
         stage ('Build Code') {
             steps {
-                sh 'npm run build'
+                sh 'npm build'
             }
         }
         stage ('Publish Code') {
             steps {
-                sshagent (credentials: ['react-server']) {
-                    sh 'rsync -azv dist 67.99.101.105:/srv/react-full-env/dist'
-                }
+                sh 'rsync -azv dist root@167.99.101.105:/srv/react-full-env/dist'
             }
         }
     }
