@@ -17,6 +17,7 @@ pipeline {
             }
         }
         stage ('Publish Code') {
+            agent none
             steps {
                 sh 'rsync -azv dist root@167.99.101.105:/srv/react-full-env/dist'
             }
