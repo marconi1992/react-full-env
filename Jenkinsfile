@@ -16,5 +16,10 @@ pipeline {
                 sh 'npm build'
             }
         }
+        stage ('Publish Code') {
+            steps {
+                sh 'rsync -azv dist root@167.99.101.105:/srv/react-full-env/dist'
+            }
+        }
     }
 }
