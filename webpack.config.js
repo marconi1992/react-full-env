@@ -44,10 +44,26 @@ serverConfig = {
     __filename: true,
     __dirname: true
   },
-  entry: path.resolve(__dirname, 'server.js'),
+  entry: [ 'babel-polyfill', path.resolve(__dirname, 'server.js')],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  },
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src')
+    }
   }
 }
 
